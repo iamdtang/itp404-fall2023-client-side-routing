@@ -1,9 +1,6 @@
-import Navigation from "../Navigation";
-
 export default function Index() {
   return (
-    <div className="container">
-      <Navigation />
+    <div>
       <h1>Home</h1>
     </div>
   );

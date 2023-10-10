@@ -6,15 +6,22 @@ import reportWebVitals from "./reportWebVitals";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Contact from "./routes/Contact";
 import Index from "./routes/Index";
+import Root from "./routes/Root";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Index />,
-  },
-  {
-    path: "/contact",
-    element: <Contact />,
+    element: <Root />,
+    children: [
+      {
+        path: "/",
+        element: <Index />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
+      },
+    ],
   },
 ]);
 
