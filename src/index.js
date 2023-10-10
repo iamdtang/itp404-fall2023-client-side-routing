@@ -16,6 +16,13 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Index />,
+        loader() {
+          return fetch(
+            "https://jsonplaceholder.typicode.com/posts?_expand=user"
+          ).then((response) => {
+            return response.json();
+          });
+        },
       },
       {
         path: "/contact",
