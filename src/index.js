@@ -7,6 +7,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Root from "./routes/Root";
 import Index from "./routes/Index";
 import Contact from "./routes/Contact";
+import Post from "./routes/Post";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,17 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />,
+      },
+      {
+        path: "/posts/:postId",
+        loader({ params }) {
+          return fetch(
+            `https://jsonplaceholder.typicode.com/posts/${params.postId}?_expand=user&_embed=comments`
+          ).then((response) => {
+            return response.json();
+          });
+        },
+        element: <Post />,
       },
     ],
   },

@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, Link } from "react-router-dom";
 
 export default function Index() {
   const posts = useLoaderData();
@@ -25,6 +25,9 @@ function PostCard(props) {
           By {props.post.user.name}
         </h6>
         <p className="card-text">{props.post.body.substring(0, 100)}...</p>
+        <Link to={`/posts/${props.post.id}`} className="card-link">
+          Read
+        </Link>
       </div>
     </div>
   );
