@@ -9,6 +9,8 @@ import Index from "./routes/Index";
 import Contact from "./routes/Contact";
 import Post from "./routes/Post";
 
+const baseUrl = process.env.REACT_APP_API_BASE_URL;
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -18,9 +20,7 @@ const router = createBrowserRouter([
         path: "/",
         element: <Index />,
         loader() {
-          return fetch(
-            "https://jsonplaceholder.typicode.com/posts?_expand=user"
-          ).then((response) => {
+          return fetch(`${baseUrl}/posts?_expand=user`).then((response) => {
             return response.json();
           });
         },
@@ -33,7 +33,7 @@ const router = createBrowserRouter([
         path: "/posts/:postId",
         loader({ params }) {
           return fetch(
-            `https://jsonplaceholder.typicode.com/posts/${params.postId}?_expand=user&_embed=comments`
+            `${baseUrl}/posts/${params.postId}?_expand=user&_embed=comments`
           ).then((response) => {
             return response.json();
           });
