@@ -1,7 +1,7 @@
 import { useLoaderData } from "react-router-dom";
 import CommentForm from "../CommentForm";
 import { useState } from "react";
-import { fetchPostById } from "../api";
+import { deleteComment, fetchPostById } from "../api";
 
 export default function Post() {
   const loadedPost = useLoaderData();
@@ -17,7 +17,40 @@ export default function Post() {
       <h3>Comments</h3>
       <ol>
         {post.comments.map((comment) => {
-          return <li key={comment.id}>{comment.body}</li>;
+          return (
+            <li key={comment.id}>
+              {comment.body}
+
+              <button
+                type="button"
+                className="btn btn-link btn-sm"
+                onClick={() => {
+                  // pessimistic
+                  // deleteComment(comment.id)
+                  //   .then(() => {
+                  //     return fetchPostById(post.id);
+                  //   })
+                  //   .then((post) => {
+                  //     setPost(post);
+                  //   });
+
+                  // optimistic, doesn't have logic in case the DELETE fails
+                  const deletedComment = comment;
+
+                  deleteComment(deletedComment.id);
+
+                  setPost({
+                    ...post,
+                    comments: post.comments.filter((comment) => {
+                      return comment.id !== deletedComment.id;
+                    }),
+                  });
+                }}
+              >
+                Delete
+              </button>
+            </li>
+          );
         })}
       </ol>
 
