@@ -1,8 +1,11 @@
 import { useLoaderData } from "react-router-dom";
 import CommentForm from "../CommentForm";
+import { useState } from "react";
+import { fetchPostById } from "../api";
 
 export default function Post() {
-  const post = useLoaderData();
+  const loadedPost = useLoaderData();
+  const [post, setPost] = useState(loadedPost);
 
   return (
     <div className="post-page">
@@ -18,7 +21,14 @@ export default function Post() {
         })}
       </ol>
 
-      <CommentForm postId={post.id} />
+      <CommentForm
+        postId={post.id}
+        onSubmit={() => {
+          fetchPostById(post.id).then((post) => {
+            setPost(post);
+          });
+        }}
+      />
     </div>
   );
 }

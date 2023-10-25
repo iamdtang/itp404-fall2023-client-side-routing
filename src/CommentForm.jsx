@@ -12,6 +12,7 @@ export default function CommentForm(props) {
 
         saveComment({ body: comment, postId: props.postId }).then(() => {
           setComment("");
+          props.onSubmit();
         });
       }}
     >
