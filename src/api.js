@@ -25,3 +25,9 @@ export function saveComment(data) {
     return response.json();
   });
 }
+
+export function deleteComment(commentId) {
+  return fetch(`${baseUrl}/comments/${commentId}`, {
+    method: "DELETE",
+  });
+}
