@@ -13,3 +13,15 @@ export function fetchPostById(postId) {
     }
   );
 }
+
+export function saveComment(data) {
+  return fetch(`${baseUrl}/comments`, {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-type": "application/json",
+    },
+  }).then((response) => {
+    return response.json();
+  });
+}
