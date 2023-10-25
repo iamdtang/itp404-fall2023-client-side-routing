@@ -1,4 +1,5 @@
 import { useLoaderData } from "react-router-dom";
+import CommentForm from "../CommentForm";
 
 export default function Post() {
   const post = useLoaderData();
@@ -16,6 +17,8 @@ export default function Post() {
           return <li key={comment.id}>{comment.body}</li>;
         })}
       </ol>
+
+      <CommentForm postId={post.id} />
     </div>
   );
 }
